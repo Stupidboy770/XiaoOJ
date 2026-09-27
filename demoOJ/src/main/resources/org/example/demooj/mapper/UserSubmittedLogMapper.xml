@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.demooj.mapper.UserSubmittedLogMapper">
+    <insert id="insertUserSubmittedLog" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into user_submitted_log(userId,problem_id,submitted_time,code,competitionId,language)
+            values(#{userId},#{problemId},#{submittedTime},#{code},#{competitionId},#{language})
+    </insert>
+
+    <update id="updateStatus">
+        update user_submitted_log
+        <set>
+            <if test="result != null">
+                result = #{result},
+            </if>
+            <if test="memory != null">
+                memory = #{memory},
+            </if>
+            <if test="runTime != null">
+                run_time = #{runTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="selectOneUserSubmittedLog">
+        select * from user_submitted_log where userId=#{userId} and competitionId=#{competitionId} order by id desc
+    </select>
+
+    <delete id="deleteByProblemId">
+        delete from user_submitted_log where problem_id=#{problemId}
+    </delete>
+
+    <delete id="deleteByCompetitionId">
+        delete from user_submitted_log where competitionId=#{competitionId}
+    </delete>
+
+    <select id="selectUnique">
+        select * from user_submitted_log
+        where competitionId=#{competitionId}
+        <if test="userId != null">
+            and userId like concat('%', #{userId}, '%')
+        </if>
+        <if test="problemId !=null">
+            and problem_Id=#{problemId}
+        </if>
+        <if test="language !=null">
+            and language=#{language}
+        </if>
+        order by id desc limit #{offset},#{limit}
+    </select>
+
+    <select id="getCount">
+        select count(*) from user_submitted_log
+        where competitionId=#{competitionId}
+        <if test="userId!=null">
+            and userId=#{userId}
+        </if>
+    </select>
+
+    <select id="selectCount">
+        select count(*) from user_submitted_log
+        where competitionId=#{competitionId}
+        <if test="userId != null">
+            and userId like concat('%', #{userId}, '%')
+        </if>
+        <if test="problemId !=null">
+            and problem_Id=#{problemId}
+        </if>
+        <if test="language !=null">
+            and language=#{language}
+        </if>
+    </select>
+</mapper>

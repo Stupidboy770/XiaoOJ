@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.demooj.mapper.ProblemMapper">
+    <select id="selectAllProblem">
+        select * from problemSet order by problemId desc
+    </select>
+
+    <select id="selectProblemById">
+        select * from problemSet where problemId=#{id}
+    </select>
+
+    <delete id="deleteProblemById">
+        delete from problemSet where problemId=#{id}
+    </delete>
+    
+    <insert id="addProblem">
+        insert into problemSet(problemName, problemDescription, problemInputDescription, problemOutputDescription, problemInput, problemOutput, memoryLimit, timeLimit)
+        values (#{problemName}, #{problemDescription}, #{problemInputDescription}, #{problemOutputDescription}, #{problemInput}, #{problemOutput}, #{memoryLimit}, #{timeLimit})
+    </insert>
+    
+    <update id="updateProblemById">
+        update problemSet
+        <set>
+            <if test="problemName != null">
+                problemName = #{problemName},
+            </if>
+            <if test="problemDescription != null">
+                problemDescription = #{problemDescription},
+            </if>
+            <if test="problemInputDescription != null">
+                problemInputDescription = #{problemInputDescription},
+            </if>
+            <if test="problemOutputDescription != null">
+                problemOutputDescription = #{problemOutputDescription},
+            </if>
+            <if test="problemInput != null">
+                problemInput = #{problemInput},
+            </if>
+            <if test="problemOutput != null">
+                problemOutput = #{problemOutput},
+            </if>
+            <if test="memoryLimit != null">
+                memoryLimit = #{memoryLimit},
+            </if>
+            <if test="timeLimit != null">
+                timeLimit = #{timeLimit},
+            </if>
+        </set>
+        where problemId = #{problemId}
+    </update>
+
+    <select id="getMaxId">
+        select max(problemId) from problemSet
+    </select>
+</mapper>

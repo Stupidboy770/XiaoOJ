@@ -1,0 +1,39 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 100MB
+  data:
+    redis:
+      host: 172.31.53.219
+      database: 0
+      port: 6102
+  application:
+    name: demoOJ
+  datasource:
+    url: jdbc:mariadb://172.31.53.219:6101/demoOJ
+    username: root
+    password: admin
+    driver‑class‑name: org.mariadb.jdbc.Driver
+    hikari:
+      maximum-pool-size: 25
+
+server:
+  tomcat:
+    accept-count: 100
+    max-connections: 8192
+    threads:
+      max: 500
+  servlet:
+    context-path: /api
+
+  #外部
+
+secretKey: "ztwnb666ztwnb666ztwnb666ztwnb666ztwnb666ztwnb666ztwnb666ztwnb666ztwnb666"
+#18000000
+expireTime: 18000000
+
+file:
+  input: "/home/admin123/zlibrary/data/"
+
+dockerUrl: "http://localhost:5050"

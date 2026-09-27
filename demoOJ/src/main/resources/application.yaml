@@ -1,0 +1,32 @@
+spring:
+  data:
+    redis:
+      host: localhost
+      password: Redis@123456
+      database: 0
+      port: 6379
+  application:
+    name: demoOJ
+  datasource:
+    url: jdbc:mariadb://localhost:3306/demoOJ
+    username: root
+    password: admin
+    driver‑class‑name: org.mariadb.jdbc.Driver
+
+server:
+  servlet:
+    context-path: /api
+
+  #外部
+
+#密钥
+secretKey: "ztwnb666ztwnb666ztwnb666ztwnb666ztwnb666ztwnb666ztwnb666ztwnb666ztwnb666"
+#登录过期时间
+expireTime: 18000000
+
+file:
+  #你的题目数据存放位置
+  input: "/home/admin1/zlibrary/data/"
+
+#go-judge判题沙箱
+dockerUrl: "http://localhost:5050"

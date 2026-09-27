@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.demooj.mapper.UserMapper">
+
+    <insert id="addUser">
+        insert into user(userId,name,password) values (#{userId},#{name},#{password})
+    </insert>
+
+    <select id="getUserById">
+        select * from user where userId=#{userId}
+    </select>
+
+    <select id="getAllUsers">
+        select * from user where admin=0
+    </select>
+
+    <select id="getInteger">
+        select count(*) from user where admin=0
+    </select>
+</mapper>

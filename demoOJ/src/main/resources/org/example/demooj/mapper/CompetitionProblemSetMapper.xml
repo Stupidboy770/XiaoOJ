@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.demooj.mapper.CompetitionProblemSetMapper">
+    <insert id="insertProblem">
+        insert into CompetitionProblemSet( competitionId, problemId,problemName) VALUES
+            (#{competitionId},#{problemId},#{problemName})
+    </insert>
+    <delete id="deleteProblem">
+        delete from CompetitionProblemSet where competitionId=#{competitionId} and problemId=#{problemId}
+    </delete>
+    <delete id="deleteProblemByGameId">
+        delete from CompetitionProblemSet where competitionId=#{competitionId}
+    </delete>
+    <delete id="deleteProblemByProId">
+        delete from CompetitionProblemSet where problemId=#{problemId}
+    </delete>
+    <select id="selectProblemsByCompetitionId">
+        select * from CompetitionProblemSet where competitionId=#{competitionId}
+    </select>
+    <update id="submitSumIncrement">
+        update CompetitionProblemSet set submitSum=submitSum+1 where competitionId=#{competitionId} and problemId=#{problemId}
+    </update>
+    <update id="acceptSumIncrement">
+        update CompetitionProblemSet set acceptSum=acceptSum+1 where competitionId=#{competitionId} and problemId=#{problemId}
+    </update>
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.demooj.mapper.CompetitionMapper">
+    <select id="selectCompetitionById">
+        select * from competition_information where id=#{id}
+    </select>
+    <select id="selectAllCompetition">
+        select * from competition_information order by id desc
+    </select>
+    <insert id="insertCompetition" useGeneratedKeys="true" keyProperty="id">
+        insert into competition_information(title, startTime, endTime,description) VALUES
+                (#{title},#{startTime},#{endTime},#{description})
+    </insert>
+    <update id="updateCompetition">
+        update competition_information
+        <set>
+            <if test="title != null and title != ''">
+                title = #{title},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="startTime != null">
+                startTime = #{startTime},
+            </if>
+            <if test="endTime != null">
+                endTime = #{endTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCompetitionById">
+        delete from competition_information where id=#{id}
+    </delete>
+</mapper>
